@@ -1,5 +1,5 @@
 {
-			"Ping G20":["Ping G20","Ping"],
-			"Ping G25":["Ping G25","Ping"],
-			"Ping G30":["Ping G30","Ping"],
+			"PingG20":["Ping G20","Ping"],
+			"PingG25":["Ping G25","Ping"],
+			"PingG30":["Ping G30","Ping"],
 }
