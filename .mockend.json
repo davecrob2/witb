@@ -1,9 +1,13 @@
-{
-  "bags": {
-    "id": "int",
+{  
+"Post": {
+    "title": "string",
+    "views": "int",
+    "published": "boolean",
     "createdAt": "date",
+    "comments": "Comment[]"
   },
-  "drivers": {
-    "data": ["string","string","string"]
+  "Comment": {
+    "body": "string",
+    "post": "Post"
   }
 }
