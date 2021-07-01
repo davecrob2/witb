@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>jQuery UI Autocomplete - Default functionality</title>
+  <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/jquery-ui.css') }}">
+  <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/search.css') }}">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script>
+$( function() {
+    var availableTags = {{ products|tojson|safe }};
+    $( "#tags" ).autocomplete({
+        // source: availableTags
+        minLength: 2,
+        source: function (request, response) {
+          response($.map(availableTags, function (obj, key) {
+        
+        var name = obj.modelName.toUpperCase();
+        
+        if (name.indexOf(request.term.toUpperCase()) != -1) {       
+          return {
+            label: obj.modelName + " (" + obj.brandName + ")", // Label for Display
+            value: obj.id // Value
+          }
+        } else {
+          return null;
+        }
+      }));      
+    },    
+    focus: function(event, ui) {
+      event.preventDefault();
+    },
+    // Once a value in the drop down list is selected, do the following:
+    select: function(event, ui) {
+            event.preventDefault();
+      // place the person.given_name value into the textfield called 'select_origin'...
+      $('#tags').val(ui.item.label);
+      // ... any other tasks (like setting Hidden Fields) go here...
+      // make a task that will push it to a db
+    }
+
+
+    });
+} );
+</script>
+</head>
+<body>
+ 
+<div class="ui-widget">
+  <label for="tags">Tags: </label>
+  <input id="tags">
+</div>
+ 
+ 
+</body>
+</html>
